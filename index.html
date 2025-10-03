@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flate And Land Sale - Find Your Perfect Home and Land</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffdd59;
+        }
+
+        .hero {
+            background: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            font-size: 2.2rem;
+            color: #2d3436;
+        }
+
+        .flats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .flat-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .flat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .flat-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .flat-content {
+            padding: 1.5rem;
+        }
+
+        .flat-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6c5ce7;
+            margin-bottom: 0.5rem;
+        }
+
+        .flat-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .flat-location {
+            color: #636e72;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .flat-features {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            color: #636e72;
+        }
+
+        .flat-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .details-btn,
+        .contact-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .details-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+        }
+
+        .details-btn:hover {
+            background: #5b4bd4;
+        }
+
+        .contact-btn {
+            background: transparent;
+            border: 2px solid #6c5ce7;
+            color: #6c5ce7;
+        }
+
+        .contact-btn:hover {
+            background: #6c5ce7;
+            color: white;
+        }
+
+        /* Sold Tag Styles */
+        .sold-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-sold-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 1rem;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalOpen 0.4s ease;
+        }
+
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.2rem;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .modal-images {
+            position: relative;
+        }
+
+        .modal-main-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px 0 0 0;
+        }
+
+        .modal-thumbnails {
+            display: flex;
+            padding: 10px;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .modal-thumb {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-thumb:hover,
+        .modal-thumb.active {
+            opacity: 1;
+        }
+
+        .modal-details {
+            padding: 2rem;
+        }
+
+        .modal-price {
+            font-size: 1.8rem;
+            color: #6c5ce7;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            margin-bottom: 1.5rem;
+            color: #636e72;
+        }
+
+        .modal-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature i {
+            color: #6c5ce7;
+        }
+
+        .modal-videos {
+            margin-top: 1.5rem;
+        }
+
+        .video-thumb {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        footer {
+            background: #2d3436;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section a {
+            color: #dfe6e9;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #6c5ce7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #6c5ce7;
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #5b4bd4;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid #636e72;
+            color: #b2bec3;
+        }
+
+        @media (max-width: 768px) {
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-main-img {
+                border-radius: 12px 12px 0 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero {
+                height: 400px;
+            }
+
+            .flats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-home"></i>
+                    <span>আমার ফ্ল্যাট</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Properties</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Find Your Dream Home and Land Today</h1>
+                <p>Discover the perfect flat or land that matches your lifestyle and budget. Browse our exclusive
+                    listings.</p>
+                <a href="#properties" class="btn">View Properties</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title" id="properties">Featured Properties</h2>
+        <div class="flats-grid">
+            <!-- Flat 1 -->
+            <div class="flat-card">
+                <!-- <div class="sold-tag">SOLD</div>-->
+                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                    alt="Modern Apartment" class="flat-img">
+                <div class="flat-content">
+                    <div class="flat-price">$350,000</div>
+                    <h3 class="flat-title">Modern City Apartment</h3>
+                    <div class="flat-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Downtown, New York
+                    </div>
+                    <div class="flat-features">
+                        <span><i class="fas fa-bed"></i> 3 Bedrooms</span>
+                        <span><i class="fas fa-bath"></i> 2 Bathrooms</span>
+                        <span><i class="fas fa-ruler-combined"></i> 1200 sq ft</span>
+                    </div>
+                    <div class="flat-actions">
+                        <button class="details-btn" data-flat="1">Details</button>
+                        <button class="contact-btn" data-title="Modern City Apartment"
+                            data-price="$350,000">Contact</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flat 2 -->
+            <div class="flat-card">
+                <div class="sold-tag">SOLD</div>
+                <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1165&q=80"
+                    alt="Luxury Penthouse" class="flat-img">
+                <div class="flat-content">
+                    <div class="flat-price">$750,000</div>
+                    <h3 class="flat-title">Luxury Penthouse</h3>
+                    <div class="flat-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Upper East Side, Manhattan
+                    </div>
+                    <div class="flat-features">
+                        <span><i class="fas fa-bed"></i> 4 Bedrooms</span>
+                        <span><i class="fas fa-bath"></i> 3 Bathrooms</span>
+                        <span><i class="fas fa-ruler-combined"></i> 2200 sq ft</span>
+                    </div>
+                    <div class="flat-actions">
+                        <button class="details-btn" data-flat="2">Details</button>
+                        <button class="contact-btn" data-title="Luxury Penthouse" data-price="$750,000">Contact</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flat 3 -->
+            <div class="flat-card">
+                <img src="https://wet-silver-asp.myfilebase.com/ipfs/QmYfgNjSKh57a7Y4jK2ufLeeBqPrr6dpqo1k9nNXpfXvp2"
+                    alt="Cozy Studio" class="flat-img">
+                <div class="flat-content">
+                    <div class="flat-price">$180,000</div>
+                    <h3 class="flat-title">Cozy Studio Apartment</h3>
+                    <div class="flat-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Brooklyn Heights, NY
+                    </div>
+                    <div class="flat-features">
+                        <span><i class="fas fa-bed"></i> 1 Bedroom</span>
+                        <span><i class="fas fa-bath"></i> 1 Bathroom</span>
+                        <span><i class="fas fa-ruler-combined"></i> 600 sq ft</span>
+                    </div>
+                    <div class="flat-actions">
+                        <button class="details-btn" data-flat="3">Details</button>
+                        <button class="contact-btn" data-title="Cozy Studio Apartment"
+                            data-price="$180,000">Contact</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-form">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-map-marker-alt"></i>Badda hossain market, Dhaka</p>
+            <p><i class="fas fa-phone"></i> 01836264291</p>
+            <p><i class="fas fa-envelope"></i> tahmidhasanrafi9@gmail.com</p>
+        </div>
+    </section>
+
+    <!-- Modal for Flat Details -->
+    <div class="modal" id="flatModal">
+        <div class="modal-content">
+            <div class="close-modal">&times;</div>
+            <div class="modal-sold-tag" id="modalSoldTag" style="display: none;">SOLD</div>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="" alt="Flat Image" class="modal-main-img" id="modalMainImg">
+                    <div class="modal-thumbnails" id="modalThumbnails">
+                        <!-- Thumbnails will be inserted here by JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-details">
+                    <div class="modal-price" id="modalPrice"></div>
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <div class="modal-location" id="modalLocation"></div>
+                    <p class="modal-description" id="modalDescription"></p>
+
+                    <div class="modal-features" id="modalFeatures">
+                        <!-- Features will be inserted here by JavaScript -->
+                    </div>
+
+                    <div class="modal-videos">
+                        <h3>Property Video</h3>
+                        <video class="video-thumb" id="modalVideo" controls>
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <button class="btn contact-btn-full" id="modalContactBtn"
+                        style="width: 100%; margin-top: 1.5rem;">Contact Agent</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container" id="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Flate Sale</h3>
+                    <p>Your trusted partner in finding the perfect home. We connect buyers with their dream properties.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#">Home</a>
+                    <a href="#">Properties</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i>Badda hossain market, Dhaka</p>
+                    <p><i class="fas fa-phone"></i> 01836264291</p>
+                    <p><i class="fas fa-envelope"></i> tahmidhasanrafi9@gmail.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Flate Sale. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // WhatsApp configuration - REPLACE WITH YOUR NUMBER
+        const whatsappNumber = "1406501219"; // Format: country code + number (no spaces or special characters)
+
+        // Flat data
+        const flats = {
+            1: {
+                price: "$350,000",
+                title: "Modern City Apartment",
+                location: "Downtown, New York",
+                description: "This stunning modern apartment offers breathtaking city views and is located in the heart of downtown. Recently renovated with high-end finishes and smart home features.",
+                images: [
+                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+                    "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=958&q=80",
+                    "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                ],
+                features: [
+                    { icon: "fas fa-bed", text: "3 Bedrooms" },
+                    { icon: "fas fa-bath", text: "2 Bathrooms" },
+                    { icon: "fas fa-ruler-combined", text: "1200 sq ft" },
+                    { icon: "fas fa-car", text: "1 Parking Space" },
+                    { icon: "fas fa-dumbbell", text: "Gym Access" },
+                    { icon: "fas fa-swimming-pool", text: "Pool Access" }
+                ],
+                video: "https://wet-silver-asp.myfilebase.com/ipfs/Qmde2Xq8To2Xvf8NkkKLhNhfPJid5aRXmMfWUeAW43VRiv",
+                sold: false
+            },
+            2: {
+                price: "$750,000",
+                title: "Luxury Penthouse",
+                location: "Upper East Side, Manhattan",
+                description: "Experience luxury living in this exquisite penthouse with panoramic city views. Features include a private terrace, gourmet kitchen, and premium amenities.",
+                images: [
+                    "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1165&q=80",
+                    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1153&q=80",
+                    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                ],
+                features: [
+                    { icon: "fas fa-bed", text: "4 Bedrooms" },
+                    { icon: "fas fa-bath", text: "3 Bathrooms" },
+                    { icon: "fas fa-ruler-combined", text: "2200 sq ft" },
+                    { icon: "fas fa-car", text: "2 Parking Spaces" },
+                    { icon: "fas fa-wine-bottle", text: "Wine Cellar" },
+                    { icon: "fas fa-fire", text: "Fireplace" }
+                ],
+                video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                sold: true
+            },
+            3: {
+                price: "$180,000",
+                title: "Cozy Studio Apartment",
+                location: "Brooklyn Heights, NY",
+                description: "Perfect for singles or couples, this cozy studio offers an efficient layout in a vibrant neighborhood. Close to parks, cafes, and public transportation.",
+                images: [
+                    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                    "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=958&q=80",
+                    "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                ],
+                features: [
+                    { icon: "fas fa-bed", text: "1 Bedroom" },
+                    { icon: "fas fa-bath", text: "1 Bathroom" },
+                    { icon: "fas fa-ruler-combined", text: "600 sq ft" },
+                    { icon: "fas fa-utensils", text: "Modern Kitchen" },
+                    { icon: "fas fa-wifi", text: "High-Speed Internet" },
+                    { icon: "fas fa-dog", text: "Pet Friendly" }
+                ],
+                video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                sold: false
+            }
+        };
+
+        // DOM elements
+        const modal = document.getElementById('flatModal');
+        const closeModal = document.querySelector('.close-modal');
+        const modalMainImg = document.getElementById('modalMainImg');
+        const modalThumbnails = document.getElementById('modalThumbnails');
+        const modalPrice = document.getElementById('modalPrice');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalLocation = document.getElementById('modalLocation');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalFeatures = document.getElementById('modalFeatures');
+        const modalVideo = document.getElementById('modalVideo');
+        const modalContactBtn = document.getElementById('modalContactBtn');
+        const modalSoldTag = document.getElementById('modalSoldTag');
+
+        // Function to open WhatsApp with a pre-filled message
+        function openWhatsApp(propertyTitle, propertyPrice) {
+            // Create a pre-filled message
+            const message = `Hello, I'm interested in the ${propertyTitle} (${propertyPrice}). Could you please provide more information?`;
+
+            // Encode the message for URL
+            const encodedMessage = encodeURIComponent(message);
+
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            // Open WhatsApp in a new tab
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Open modal when details button is clicked
+        document.querySelectorAll('.details-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const flatId = this.getAttribute('data-flat');
+                openModal(flatId);
+            });
+        });
+
+        // Add WhatsApp functionality to contact buttons on property cards
+        document.querySelectorAll('.contact-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const propertyTitle = this.getAttribute('data-title');
+                const propertyPrice = this.getAttribute('data-price');
+                openWhatsApp(propertyTitle, propertyPrice);
+            });
+        });
+
+        // Close modal when X is clicked
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside the content
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Function to open modal and populate with flat data
+        function openModal(flatId) {
+            const flat = flats[flatId];
+
+            // Set main content
+            modalPrice.textContent = flat.price;
+            modalTitle.textContent = flat.title;
+            modalLocation.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${flat.location}`;
+            modalDescription.textContent = flat.description;
+
+            // Set main image
+            modalMainImg.src = flat.images[0];
+
+            // Create thumbnails
+            modalThumbnails.innerHTML = '';
+            flat.images.forEach((image, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = image;
+                thumb.alt = `Thumbnail ${index + 1}`;
+                thumb.className = 'modal-thumb';
+                if (index === 0) thumb.classList.add('active');
+
+                thumb.addEventListener('click', () => {
+                    modalMainImg.src = image;
+                    document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                });
+
+                modalThumbnails.appendChild(thumb);
+            });
+
+            // Create features
+            modalFeatures.innerHTML = '';
+            flat.features.forEach(feature => {
+                const featureEl = document.createElement('div');
+                featureEl.className = 'feature';
+                featureEl.innerHTML = `<i class="${feature.icon}"></i> <span>${feature.text}</span>`;
+                modalFeatures.appendChild(featureEl);
+            });
+
+            // Set video
+            modalVideo.src = flat.video;
+
+            // Show/hide sold tag in modal
+            if (flat.sold) {
+                modalSoldTag.style.display = 'block';
+            } else {
+                modalSoldTag.style.display = 'none';
+            }
+
+            // Set up WhatsApp functionality for modal contact button
+            modalContactBtn.onclick = function () {
+                openWhatsApp(flat.title, flat.price);
+            };
+
+            // Show modal
+            modal.style.display = 'flex';
+        }
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>
